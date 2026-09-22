@@ -1,0 +1,143 @@
+1. Divisible by 3 and 5
+
+Question: Check whether a number is divisible by both 3 and 5.
+
+Logic: Check num % 3 == 0 and num % 5 == 0.
+
+# Take a number from the user
+num = int(input("Enter a number: "))
+
+# Check divisibility by both 3 and 5
+if num % 3 == 0 and num % 5 == 0:
+    print("The number is divisible by both 3 and 5")
+else:
+    print("The number is not divisible by both 3 and 5")
+2. Divisible by 2 or 7
+
+Question: Check whether a number is divisible by 2 or 7.
+
+Logic: At least one condition should be true.
+
+# Take a number from the user
+num = int(input("Enter a number: "))
+
+# Check divisibility by 2 or 7
+if num % 2 == 0 or num % 7 == 0:
+    print("The number is divisible by 2 or 7")
+else:
+    print("The number is not divisible by 2 or 7")
+3. Number between 10 and 50
+
+Question: Check whether a number is greater than 10 and less than 50.
+
+Logic: Both comparison conditions must be true.
+
+# Take a number from the user
+num = int(input("Enter a number: "))
+
+# Check if the number is between 10 and 50
+if num > 10 and num < 50:
+    print("The number is between 10 and 50")
+else:
+    print("The number is not between 10 and 50")
+4. Student exam eligibility
+
+Question: A student can give an exam if attendance is 75% or more AND fees are paid.
+
+Logic: Check attendance and fee status together.
+
+# Take attendance percentage
+attendance = int(input("Enter attendance percentage: "))
+
+# Ask about fee payment
+fees = input("Have you paid the fees? (yes/no): ")
+
+# Check both conditions
+if attendance >= 75 and fees == "yes":
+    print("You can give the exam")
+else:
+    print("You cannot give the exam")
+5. Even and greater than 20
+
+Question: Check whether a number is even AND greater than 20.
+
+Logic: Check num % 2 == 0 and num > 20.
+
+# Take a number from the user
+num = int(input("Enter a number: "))
+
+# Check if the number is even and greater than 20
+if num % 2 == 0 and num > 20:
+    print("The number is even and greater than 20")
+else:
+    print("The number does not satisfy both conditions")
+these are way to easy maek it medium to difficult level question
+
+Absolutely. If this is for a class after students have learned if, elif, else, comparison operators, logical operators, and %, these will be better.
+
+1. Special Number Checker
+
+Question:
+Take a number from the user. Check whether the number is:
+
+divisible by 3 and 5, OR
+divisible by 7 but not divisible by 2.
+
+Print "Special Number" if either condition is true.
+
+Logic
+Check num % 3 == 0 and num % 5 == 0
+Check num % 7 == 0 and num % 2 != 0
+If either condition is true, it is a special number.
+# Take a number from the user
+num = int(input("Enter a number: "))
+
+# Check the first condition
+condition1 = num % 3 == 0 and num % 5 == 0
+
+# Check the second condition
+condition2 = num % 7 == 0 and num % 2 != 0
+
+# Check if either condition is true
+if condition1 or condition2:
+    print("Special Number")
+else:
+    print("Not a Special Number")
+2. Electricity Bill Category
+
+Question:
+Take the number of electricity units consumed.
+
+Print:
+
+"Low Consumption" if units are between 0 and 100
+"Medium Consumption" if units are between 101 and 300
+"High Consumption" if units are between 301 and 500
+"Very High Consumption" if units are above 500
+"Invalid Input" if units are negative.
+Logic
+
+First check whether the input is valid. Then use elif to identify the consumption range.
+
+# Take electricity units from the user
+units = int(input("Enter electricity units: "))
+
+# Check if the input is invalid
+if units < 0:
+    print("Invalid Input")
+
+# Check low consumption
+elif units <= 100:
+    print("Low Consumption")
+
+# Check medium consumption
+elif units <= 300:
+    print("Medium Consumption")
+
+# Check high consumption
+elif units <= 500:
+    print("High Consumption")
+
+# Remaining values are above 500
+else:
+    print("Very High Consumption")
