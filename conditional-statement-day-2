@@ -45,3 +45,102 @@ else:
         print("Withdrawal successful")
         print("Remaining balance: ", balance)
 
+
+
+---------------------------------------------------------------------------------
+
+# Online shopping checkout system
+'''
+create a simple shopping checkout program
+
+Take the following inputs
+- total shopping amount
+- whether the customer has a membership(yes/no)
+- whether the customer has a coupon
+
+Apply these rules
+- if the amount is Rs 5000 or more, give 20% discount
+- if the amount is between Rs 200 and Rs 4999, give 10% discount
+- if the customer is a member, give an additional 5% discount
+- if the customer has a coupon, give an additional Rs200 discount
+- the final bill cannot become negative
+- if the shopping amount is less than 500, print - "Minimum purchase should be Rs500"
+'''
+
+amount = float(input("Enter total shopping amount: "))
+membership = input("Are you a member? (yes/no): ").lower()
+coupon = input("Do you have a coupon? (yes/no): ").lower()
+
+# check minimum shopping amount
+if amount < 500:
+    print("Minimum purchase should be Rs 500")
+else:
+    #calculate discount based on shopping amount
+    if amount >= 5000:
+        discount = amount * 20/100
+    elif amount >= 2000:
+        discount = amount * 10/100
+    else:
+        discount = 0
+
+    # calculate membership discount
+    if membership == "yes":
+        member_discount = amount * 5/100
+    else:
+        member_discount = 0
+
+    # calculate coupon discount
+    if coupon == "yes":
+        coupon_discount = 200
+    else:
+        coupon_discount = 0
+
+    # calculate total discount
+    total_discount = discount + member_discount + coupon_discount
+
+    # calculate final bill
+    final_amount = amount - total_discount
+
+    # make sure final bill does not become negative
+    if final_amount <0:
+        final_amount = 0
+
+    # Display bill details
+    print("\n------Shopping bill-------")
+    print("Original Amount : Rs",amount)
+    print("Shopping discount: Rs", discount)
+    print("Membership discount : Rs", member_discount)
+    print("Coupon discount : Rs", coupon_discount)
+    print("Total discount : Rs", total_discount)
+    print("Final Amount : Rs", final_amount)
+
+
+-----------------------------------------------------------------------------------------
+
+HOMEWORK QUESTION
+
+Movie Ticket Booking System
+
+Question:
+Create a movie ticket booking program.
+
+Take:
+
+Customer age
+Number of tickets
+Ticket price = ₹250
+Whether the customer has a membership (yes/no)
+
+Apply these rules:
+
+Age below 5 → Ticket is free.
+Age 5 to 17 → 50% discount.
+Age 18 to 59 → Full price.
+Age 60 or above → 30% discount.
+Members get an additional 10% discount.
+Maximum 6 tickets can be booked at once.
+Number of tickets must be greater than 0.
+
+Calculate and display the final ticket amount.
+
+Challenge: Make sure the membership discount is applied after the age-based discount.
