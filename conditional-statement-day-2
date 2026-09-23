@@ -1,0 +1,47 @@
+'''
+ATM machine
+
+create a simple ATM withdrawal program
+the user enters:
+- Account balance
+- withdrawal amount
+- PIN
+
+the withdrawal should be allowed only when:
+- pin is 1234
+- withdrawal amount is greater than 0
+- withdrawal amount is less than or equal to balance
+- withdrawal amount must be a multiple of 100
+
+otherwise, display the appropriate error message
+'''
+
+
+# take account details
+balance = int(input("Enter account balance : "))
+pin = int(input("Enter PIN : "))
+
+
+# check PIN
+if pin != 1234:
+    print("Incorrect PIN")
+else:
+    amount = int(input("Enter withdrawal amount : "))
+    # check whether withdrawal amount is positive
+    if amount <= 0:
+        print("Invalid withdrawal amount")
+
+    # Check whether amount is a multiple of 100
+    elif amount % 100 != 0:
+        print("mount must be a multiple of 100")
+
+    # check whether sufficient balance is available
+    elif amount > balance:
+        print("Insufficient balance")
+
+    # of all conditions are satisfied
+    else:
+        balance = balance - amount
+        print("Withdrawal successful")
+        print("Remaining balance: ", balance)
+
