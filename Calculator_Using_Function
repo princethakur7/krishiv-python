@@ -1,0 +1,56 @@
+# simple python calculator using function
+
+# Function to add number 
+def add(a,b):
+    return a+b 
+
+# Function to subtract number 
+def subtract(a,b):
+    return a-b 
+
+# Function to multiple number 
+def multiply(a,b):
+    return a*b
+
+# Function to divide number
+def divide(a,b):
+    if b == 0: 
+        return "cannot divid the number with zero"
+    return a/b
+
+
+while True: 
+    num1 = float(input("Enter your first number : "))
+    num2 = float(input("Enter your second number: "))
+
+    print("------------Simple Calculator----------")
+    print("1. Addition")
+    print("2. subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == "1":
+        print("Result : ", add(num1, num2))
+    elif choice == "2":
+        print("Result : ", subtract(num1, num2))
+    elif choice == "3":
+        print("Result : ", multiply(num1, num2))
+    elif choice == "4":
+        print("Result: ", divide(num1, num2))
+    else: 
+        print("Invalid choice")
+
+        # \n is used for starting anythin in a new line
+    again = input("\nDo you wanted to do another calculation (yes/no): ")
+
+    if again.lower() != "yes":
+        print("Thnakyou for using calculator")
+        break
+
+
+
+--------------------------------------
+HOMEWORK 
+add function to find remainder, greater than less than or equals 
