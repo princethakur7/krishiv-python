@@ -1,0 +1,64 @@
+# Shopping list manager
+
+shopping_list = []
+
+# Function to add items
+def add_item():
+    item = input("Enter item name : ")
+    shopping_list.append(item)
+    print(item, "added to shopping list")
+
+# Function to view items
+def view_list():
+    if len(shopping_list)==0:
+        print("your shopping list is empty!")
+    else:
+        print("\nYour shopping list: ")
+        for i, item in enumerate(shopping_list, start=1):
+            print(i, ".", item)
+
+# Function to remove item
+def remove_item():
+    view_list()
+
+    if len(shopping_list)>0:
+        number = int(input("Enter item number to remove : "))
+
+        if number >= 1 and number <= len(shopping_list):
+            removed = shopping_list.pop(number-1)
+            print(removed, "removed successfully!")
+        else:
+            print("Invalid item number")
+
+# Function to count items
+def count_item():
+    print("Total item : ", len(shopping_list))
+
+# Main program
+while True:
+    print("\n=======SHOPPING LIST MANAGER========")
+    print("1. Add item")
+    print("2. View shopping list")
+    print("3. remove item")
+    print("4. count item")
+    print("5. exit")
+
+    choice = input("Enter your choice : ")
+
+    if choice == "1":
+        add_item()
+    elif choice == "2":
+        view_list()
+    elif choice == "3":
+        remove_item()
+    elif choice == "4":
+        count_item()
+    elif choice == "5":
+        print("Thank you for using shopping list manager!")
+        break
+    else:
+        print("Invalid choice! Try again")
+
+
+Homework 
+add the function to edit the item in the list
