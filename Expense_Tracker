@@ -1,0 +1,82 @@
+# Expense tracker
+from datetime import datetime
+
+expenses = []
+budget = 0
+
+# Generate expense ID
+def generate_id():
+    if len(expenses) ==0:
+        return 1
+    return expenses[-1]["id"]+1
+
+# Display Main Menu
+def show_menu():
+    print("\n======= EXPENSE TRACKER =======")
+    print("1. Add Expense")
+    print("2. View All Expense")
+    print("3. Search Expense")
+    print("4. Filter by Category")
+    print("5. Delete Expense")
+    print("6. Expense Summary")
+    print("7. Category-wise Summary")
+    print("8. Change Monthly Budget")
+    print("9. Budget Status")
+    print("10. Exit")
+
+# Get Valid Amount
+def get_amount():
+    while True:
+        try:
+            amount = float(input("Enter amount : $ "))
+
+            if amount <= 0:
+                print("Amount must be grater than 0.")
+            else:
+                return amount
+        except ValueError:
+            print("Please enter a valid number.")
+
+# get Expense Date
+def get_date():
+    while True:
+        date = input("Enter date (DD-MM-YYYY): ")
+
+        try:
+            datetime.strptime(date, "%d-%m-%y")
+            return date
+        except ValueError:
+            print("invalid date format")
+            print("Please use DD-MM-YYYY")
+
+
+# Calculate total
+def calculate_total():
+    total = 0
+
+    for expense in expenses:
+        total += expense["amount"]
+
+    return total
+
+# Set Monthly Budget
+def set_budget():
+    global budget
+
+    print("\n====== SET MONTHLY BUDGET ===========")
+    while True:
+        try:
+            amount = float(input("Enter your monthly budget : $ "))
+
+            if amount <= 0:
+                print("Budget must be grater than 0.")
+            else:
+                budget = amount
+
+                print("\nMonthly budget set to $: ",
+                      format(budget, ".2f")
+                      )
+                return
+
+        except ValueError:
+            print("Please enter a valid number.")
