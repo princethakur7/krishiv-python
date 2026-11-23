@@ -1,20 +1,22 @@
-# Expense tracker
 from datetime import datetime
 
 expenses = []
 budget = 0
 
-# Generate expense ID
+
+# Generate Expense ID
 def generate_id():
-    if len(expenses) ==0:
+    if len(expenses) == 0:
         return 1
-    return expenses[-1]["id"]+1
+
+    return expenses[-1]["id"] + 1
+
 
 # Display Main Menu
 def show_menu():
-    print("\n======= EXPENSE TRACKER =======")
+    print("\n========== EXPENSE TRACKER ==========")
     print("1. Add Expense")
-    print("2. View All Expense")
+    print("2. View All Expenses")
     print("3. Search Expense")
     print("4. Filter by Category")
     print("5. Delete Expense")
@@ -24,33 +26,37 @@ def show_menu():
     print("9. Budget Status")
     print("10. Exit")
 
+
 # Get Valid Amount
 def get_amount():
     while True:
         try:
-            amount = float(input("Enter amount : $ "))
+            amount = float(input("Enter amount: Rs "))
 
             if amount <= 0:
-                print("Amount must be grater than 0.")
+                print("Amount must be greater than 0.")
             else:
                 return amount
+
         except ValueError:
             print("Please enter a valid number.")
 
-# get Expense Date
+
+# Get Expense Date
 def get_date():
     while True:
         date = input("Enter date (DD-MM-YYYY): ")
 
         try:
-            datetime.strptime(date, "%d-%m-%y")
+            datetime.strptime(date, "%d-%m-%Y")
             return date
+
         except ValueError:
-            print("invalid date format")
-            print("Please use DD-MM-YYYY")
+            print("Invalid date format.")
+            print("Please use DD-MM-YYYY.")
 
 
-# Calculate total
+# Calculate Total
 def calculate_total():
     total = 0
 
@@ -59,74 +65,91 @@ def calculate_total():
 
     return total
 
+
 # Set Monthly Budget
 def set_budget():
+
     global budget
 
-    print("\n====== SET MONTHLY BUDGET ===========")
+    print("\n========== SET MONTHLY BUDGET ==========")
+
     while True:
+
         try:
-            amount = float(input("Enter your monthly budget : $ "))
+            amount = float(input("Enter your monthly budget: Rs "))
 
             if amount <= 0:
-                print("Budget must be grater than 0.")
+                print("Budget must be greater than 0.")
+
             else:
                 budget = amount
 
-                print("\nMonthly budget set to $: ",
-                      format(budget, ".2f")
-                      )
+                print(
+                    "\nMonthly budget set to Rs",
+                    format(budget, ".2f")
+                )
+
                 return
 
         except ValueError:
             print("Please enter a valid number.")
 
+
 # Check Budget
 def check_budget():
+
     if budget == 0:
         return
 
     total = calculate_total()
     remaining = budget - total
 
-    print("\n============BUDGET CHECK ==========")
+    print("\n---------- BUDGET CHECK ----------")
+
     if remaining > 0:
-        percentage = (total/budget) * 100
+
+        percentage = (total / budget) * 100
 
         print(
-            "Budget Used : ",
+            "Budget Used :",
             format(percentage, ".2f"),
             "%"
         )
 
         print(
-            "Remaining  : Rs",
+            "Remaining   : Rs",
             format(remaining, ".2f")
         )
 
     elif remaining == 0:
-        print("WARNING: Ypu have used your entire budget")
+
+        print("WARNING: You have used your entire budget!")
+
     else:
+
         exceeded = abs(remaining)
 
-        print("Warning: You have exceeded your budget!")
+        print("WARNING: You have exceeded your budget!")
         print(
-            "Exceeded by : Rs",
+            "Exceeded By : Rs",
             format(exceeded, ".2f")
         )
 
+
 # Add Expense
 def add_expense():
-    print("\n========= ADD EXPENSE ==============")
-    title = input("Enter expense title").strip()
+
+    print("\n========== ADD EXPENSE ==========")
+
+    title = input("Enter expense title: ").strip()
 
     if title == "":
-        print("title cannot be empty.")
+        print("Title cannot be empty.")
         return
 
     amount = get_amount()
 
-    category = input("Enter category : ").strip()
+    category = input("Enter category: ").strip()
 
     if category == "":
         print("Category cannot be empty.")
@@ -135,7 +158,7 @@ def add_expense():
     date = get_date()
 
     expense = {
-        "id":generate_id(),
+        "id": generate_id(),
         "title": title,
         "amount": amount,
         "category": category,
@@ -145,45 +168,56 @@ def add_expense():
     expenses.append(expense)
 
     print("\nExpense added successfully!")
-    print("Expense ID: ", expenses["id"])
+    print("Expense ID:", expense["id"])
 
-    #check budget immediately
+    # Check budget immediately
     check_budget()
+
 
 # Display One Expense
 def display_expense(expense):
-    print("ID       : ", expense["id"])
-    print("Title    : ", expense["title"])
-    print("Amount   : ", format(expense["amount"], ".2f"))
-    print("category : ", expense["category"])
-    print("Date     : ", expense["date"])
+
+    print("ID       :", expense["id"])
+    print("Title    :", expense["title"])
+    print("Amount   :", format(expense["amount"], ".2f"))
+    print("Category :", expense["category"])
+    print("Date     :", expense["date"])
 
 
-# View All Expense
+# View All Expenses
 def view_expense():
-    print("\n============ ALL EXPENSE ================")
+
+    print("\n=============== ALL EXPENSES ===============")
 
     if len(expenses) == 0:
-        print("No expense recorded.")
+        print("No expenses recorded.")
+        return
 
     total = 0
 
     for expense in expenses:
+
         display_expense(expense)
-        print("-" * 50 )
+
+        print("-" * 50)
 
         total += expense["amount"]
-    print("Total Expense : $", format(total, '.2f'))
+
+    print("Total Expenses : Rs", format(total, ".2f"))
+
 
 # Search Expense
 def search_expense():
-    print("\n ==========SEARCH EXPENSE ==============")
 
-    if len(expenses) ==0:
+    print("\n========== SEARCH EXPENSE ==========")
+
+    if len(expenses) == 0:
         print("No expenses available.")
         return
 
-    keyword = input("Enter title or category to search : ").lower().strip()
+    keyword = input(
+        "Enter title or category to search: "
+    ).lower().strip()
 
     if keyword == "":
         print("Search keyword cannot be empty.")
@@ -194,28 +228,32 @@ def search_expense():
     for expense in expenses:
 
         if (
-                keyword in expense["title"].lower()
-                or keyword in expense["category"].lower()
+            keyword in expense["title"].lower()
+            or keyword in expense["category"].lower()
         ):
+
             display_expense(expense)
 
             print("-" * 50)
 
             found = True
 
-        if not found:
-            print("No matching expenses found.")
+    if not found:
+        print("No matching expenses found.")
 
 
-#Filter by Category
+# Filter by Category
 def filter_category():
-    print("\n=========== FILTER BY CATEGORY ===========")
 
-    if len(expenses) ==0:
-        print("No expense available.")
+    print("\n========== FILTER BY CATEGORY ==========")
+
+    if len(expenses) == 0:
+        print("No expenses available.")
         return
 
-    category = input("Enter category : ").lower().strip()
+    category = input(
+        "Enter category: "
+    ).strip().lower()
 
     if category == "":
         print("Category cannot be empty.")
@@ -225,19 +263,334 @@ def filter_category():
     category_total = 0
 
     for expense in expenses:
-        if expense["category"].lower()== category:
+
+        if expense["category"].lower() == category:
+
             display_expense(expense)
-            print("-"*50)
+
+            print("-" * 50)
+
             category_total += expense["amount"]
+
             found = True
 
-        if found:
+    if found:
+
+        print(
+            "Total spent in",
+            category,
+            ": Rs",
+            format(category_total, ".2f")
+        )
+
+    else:
+
+        print(
+            "No expenses found in this category."
+        )
+
+
+# Delete Expense
+def delete_expense():
+
+    print("\n========== DELETE EXPENSE ==========")
+
+    if len(expenses) == 0:
+        print("No expenses available.")
+        return
+
+    try:
+
+        expense_id = int(
+            input("Enter Expense ID to delete: ")
+        )
+
+    except ValueError:
+
+        print("Invalid ID.")
+        return
+
+    for expense in expenses:
+
+        if expense["id"] == expense_id:
+
+            print("\nExpense found:")
+
+            display_expense(expense)
+
+            confirm = input(
+                "\nAre you sure you want to delete it? (y/n): "
+            ).lower()
+
+            if confirm == "y" or confirm == "yes":
+
+                expenses.remove(expense)
+
+                print(
+                    "Expense deleted successfully."
+                )
+
+                # Show updated budget status
+                check_budget()
+
+            else:
+
+                print("Deletion cancelled.")
+
+            return
+
+    print("Expense ID not found.")
+
+
+# Calculate Average
+def calculate_average():
+
+    if len(expenses) == 0:
+        return 0
+
+    total = calculate_total()
+
+    return total / len(expenses)
+
+
+# Find Highest Expense
+def find_highest_expense():
+
+    if len(expenses) == 0:
+        return None
+
+    highest = expenses[0]
+
+    for expense in expenses:
+
+        if expense["amount"] > highest["amount"]:
+            highest = expense
+
+    return highest
+
+
+# Find Lowest Expense
+def find_lowest_expense():
+
+    if len(expenses) == 0:
+        return None
+
+    lowest = expenses[0]
+
+    for expense in expenses:
+
+        if expense["amount"] < lowest["amount"]:
+            lowest = expense
+
+    return lowest
+
+
+# Expense Summary
+def expense_summary():
+
+    print("\n========== EXPENSE SUMMARY ==========")
+
+    if len(expenses) == 0:
+
+        print("No expenses available.")
+        return
+
+    total = calculate_total()
+    average = calculate_average()
+
+    highest = find_highest_expense()
+    lowest = find_lowest_expense()
+
+    print("Number of expenses :", len(expenses))
+    print("Total spending     : Rs", format(total, ".2f"))
+    print("Average expense    : Rs", format(average, ".2f"))
+
+    print("\nHighest Expense:")
+    display_expense(highest)
+
+    print("\nLowest Expense:")
+    display_expense(lowest)
+
+
+# Category-wise Summary
+def category_summary():
+
+    print("\n========== CATEGORY SUMMARY ==========")
+
+    if len(expenses) == 0:
+
+        print("No expenses available.")
+        return
+
+    categories = {}
+
+    for expense in expenses:
+
+        category = expense["category"]
+
+        if category not in categories:
+            categories[category] = 0
+
+        categories[category] += expense["amount"]
+
+    for category, amount in categories.items():
+
+        print(
+            category,
+            ": Rs",
+            format(amount, ".2f")
+        )
+
+
+# Budget Status
+def budget_status():
+
+    print("\n========== BUDGET STATUS ==========")
+
+    if budget == 0:
+
+        print("Monthly budget has not been set.")
+        return
+
+    total = calculate_total()
+    remaining = budget - total
+
+    print(
+        "Monthly Budget : Rs",
+        format(budget, ".2f")
+    )
+
+    print(
+        "Total Spent    : Rs",
+        format(total, ".2f")
+    )
+
+    if remaining > 0:
+
+        percentage = (total / budget) * 100
+
+        print(
+            "Remaining      : Rs",
+            format(remaining, ".2f")
+        )
+
+        print(
+            "Budget Used    :",
+            format(percentage, ".2f"),
+            "%"
+        )
+
+    elif remaining == 0:
+
+        print("Remaining      : Rs 0.00")
+
+        print(
+            "WARNING: You have used your entire budget!"
+        )
+
+    else:
+
+        exceeded = abs(remaining)
+
+        percentage = (total / budget) * 100
+
+        print(
+            "Budget Exceeded : Rs",
+            format(exceeded, ".2f")
+        )
+
+        print(
+            "Budget Used     :",
+            format(percentage, ".2f"),
+            "%"
+        )
+
+        print(
+            "WARNING: YOU HAVE EXCEEDED YOUR BUDGET!"
+        )
+
+
+# Main Program
+def main():
+
+    print("\n========================================")
+    print("        WELCOME TO EXPENSE TRACKER")
+    print("========================================")
+
+    print(
+        "\nBefore we start tracking your expenses,"
+    )
+    print(
+        "let's set your monthly budget."
+    )
+
+    # Budget is required before starting
+    set_budget()
+
+    while True:
+
+        show_menu()
+
+        choice = input(
+            "\nEnter your choice: "
+        ).strip()
+
+        if choice == "1":
+
+            add_expense()
+
+        elif choice == "2":
+
+            view_expense()
+
+        elif choice == "3":
+
+            search_expense()
+
+        elif choice == "4":
+
+            filter_category()
+
+        elif choice == "5":
+
+            delete_expense()
+
+        elif choice == "6":
+
+            expense_summary()
+
+        elif choice == "7":
+
+            category_summary()
+
+        elif choice == "8":
+
+            set_budget()
+
+            # Show current status after changing budget
+            check_budget()
+
+        elif choice == "9":
+
+            budget_status()
+
+        elif choice == "10":
+
             print(
-                "total spend in",
-                category,
-                format(category,".2f")
+                "\nThank you for using Expense Tracker!"
             )
+
+            print("Goodbye!")
+
+            break
+
         else:
-            print("No expenses found in this category.")
+
+            print(
+                "Invalid choice. Please enter a number "
+                "between 1 and 10."
+            )
 
 
+# Start Program
+main()
